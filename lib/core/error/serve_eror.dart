@@ -5,6 +5,9 @@ class ServeEror implements Exception {
   final ErorrModel erorrModel;
 
   ServeEror({required this.erorrModel});
+
+  @override
+  String toString() => erorrModel.errorMessage;
 }
 
 void handelException(DioException e) {

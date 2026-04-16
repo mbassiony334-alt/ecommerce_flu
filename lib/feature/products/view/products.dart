@@ -27,7 +27,7 @@ class _ProductHomeState extends State<ProductHome> {
   void initState() {
     super.initState();
 
-    context.read<ProductsCubit>().getProudacts();
+    context.read<ProductsCubit>().getProducts();
   }
 
   @override
@@ -40,7 +40,7 @@ class _ProductHomeState extends State<ProductHome> {
         index: _currentIndex,
         children: [
           // 0 – Home
-          const HomeView(),
+          HomeView(onSeeAllProducts: () => setState(() => _currentIndex = 1)),
 
           // 1 – Shop (products grid)
           _buildShopTab(context),
@@ -192,7 +192,7 @@ class _ProductHomeState extends State<ProductHome> {
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () =>
-                        context.read<ProductsCubit>().getProudacts(),
+                        context.read<ProductsCubit>().getProducts(),
                     child: const Text('Retry'),
                   ),
                 ],

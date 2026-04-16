@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:e_commarcae/core/bloc/bloc.dart';
 import 'package:e_commarcae/core/services/api/dio_Concumer.dart';
 import 'package:e_commarcae/core/services/cash/cash_Healper.dart';
 import 'package:e_commarcae/core/theme/allTheme/dark_Them.dart';
@@ -18,6 +19,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
+  Bloc.observer = MyBlocObserver();
   runApp(
     MultiBlocProvider(
       providers: [
@@ -25,15 +27,13 @@ void main() async {
           create: (context) => AuthCubit(api: DioConsumer(dio: Dio())),
         ),
         BlocProvider(
-          create: (context) =>
-              CategoriesCubit(api: DioConsumer(dio: Dio())),
+          create: (context) => CategoriesCubit(api: DioConsumer(dio: Dio())),
         ),
         BlocProvider(
           create: (context) => BrandCubit(api: DioConsumer(dio: Dio())),
         ),
         BlocProvider(
-          create: (context) =>
-              ProductsCubit(api: DioConsumer(dio: Dio())),
+          create: (context) => ProductsCubit(api: DioConsumer(dio: Dio())),
         ),
         BlocProvider(
           create: (context) => CartCubit(api: DioConsumer(dio: Dio())),
@@ -43,13 +43,10 @@ void main() async {
         ),
         // HomeCubit drives the home screen data loading
         BlocProvider(
-          create: (context) =>
-              HomeCubit(api: DioConsumer(dio: Dio())),
+          create: (context) => HomeCubit(api: DioConsumer(dio: Dio())),
         ),
 
-        BlocProvider(
-          create: (context) => ThemeCubit(),
-        ),
+        BlocProvider(create: (context) => ThemeCubit()),
       ],
       child: const MyApp(),
     ),

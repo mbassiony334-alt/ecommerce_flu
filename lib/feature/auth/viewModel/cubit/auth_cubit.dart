@@ -23,8 +23,8 @@ class AuthCubit extends Cubit<AuthState> {
       );
       print(response);
       SignModel signModel = SignModel.fromJson(response);
-      CacheHelper.saveData(key: ApiKey.token, value: signModel.token);
-      CacheHelper.saveData(key: "userInfo", value: signModel.user);
+      await CacheHelper.saveData(key: ApiKey.token, value: signModel.token);
+      await CacheHelper.saveData(key: 'userName', value: signModel.user.name);
       emit(AuthSucces());
     } on ServeEror catch (e) {
       emit(AuthFailure(errormessage: e.erorrModel.errorMessage));
@@ -48,8 +48,8 @@ class AuthCubit extends Cubit<AuthState> {
 
       if (response is Map<String, dynamic> && response.containsKey('token')) {
         SignModel signModel = SignModel.fromJson(response);
-        CacheHelper.saveData(key: ApiKey.token, value: signModel.token);
-        CacheHelper.saveData(key: "userInfo", value: signModel.user);
+        await CacheHelper.saveData(key: ApiKey.token, value: signModel.token);
+        await CacheHelper.saveData(key: 'userName', value: signModel.user.name);
       }
       emit(Regsuccess());
     } on ServeEror catch (e) {

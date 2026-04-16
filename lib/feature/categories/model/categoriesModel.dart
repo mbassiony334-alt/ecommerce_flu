@@ -13,10 +13,10 @@ class CategoriesModel {
 
   factory CategoriesModel.fromJson(Map<String, dynamic> json) =>
       CategoriesModel(
-        slug: json["slug"],
-        name: json["name"],
-        url: json["url"],
-        image: json["image"],
+        slug: json["slug"] ?? "",
+        name: json["name"] ?? "Category",
+        url: json["url"] ?? "",
+        image: json["image"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {

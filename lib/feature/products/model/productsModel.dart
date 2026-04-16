@@ -48,29 +48,31 @@ class ProductsModel {
   });
 
   factory ProductsModel.fromJson(Map<String, dynamic> json) => ProductsModel(
-    id: json["id"],
-    title: json["title"],
-    description: json["description"],
-    category: categoryValues.map[json["category"]]!,
-    price: json["price"]?.toDouble(),
-    discountPercentage: json["discountPercentage"]?.toDouble(),
-    rating: json["rating"]?.toDouble(),
-    stock: json["stock"],
-    tags: List<String>.from(json["tags"].map((x) => x)),
-    brand: json["brand"],
-    sku: json["sku"],
-    weight: json["weight"],
-    dimensions: Dimensions.fromJson(json["dimensions"]),
-    warrantyInformation: json["warrantyInformation"],
-    shippingInformation: json["shippingInformation"],
+    id: json["id"] ?? 0,
+    title: json["title"] ?? "Unknown Product",
+    description: json["description"] ?? "",
+    category: categoryValues.map[json["category"]] ?? Category.BEAUTY,
+    price: (json["price"] ?? 0.0).toDouble(),
+    discountPercentage: (json["discountPercentage"] ?? 0.0).toDouble(),
+    rating: (json["rating"] ?? 0.0).toDouble(),
+    stock: json["stock"] ?? 0,
+    tags: json["tags"] != null ? List<String>.from(json["tags"].map((x) => x.toString())) : [],
+    brand: json["brand"] ?? "Generic",
+    sku: json["sku"] ?? "",
+    weight: json["weight"] ?? 0,
+    dimensions: Dimensions.fromJson(json["dimensions"] ?? {}),
+    warrantyInformation: json["warrantyInformation"] ?? "",
+    shippingInformation: json["shippingInformation"] ?? "",
     availabilityStatus:
-        availabilityStatusValues.map[json["availabilityStatus"]]!,
-    reviews: List<Review>.from(json["reviews"].map((x) => Review.fromJson(x))),
-    returnPolicy: returnPolicyValues.map[json["returnPolicy"]]!,
-    minimumOrderQuantity: json["minimumOrderQuantity"],
-    meta: Meta.fromJson(json["meta"]),
-    images: List<String>.from(json["images"].map((x) => x)),
-    thumbnail: json["thumbnail"],
+        availabilityStatusValues.map[json["availabilityStatus"]] ?? AvailabilityStatus.IN_STOCK,
+    reviews: json["reviews"] != null
+        ? List<Review>.from(json["reviews"].map((x) => Review.fromJson(x)))
+        : [],
+    returnPolicy: returnPolicyValues.map[json["returnPolicy"]] ?? ReturnPolicy.NO_RETURN_POLICY,
+    minimumOrderQuantity: json["minimumOrderQuantity"] ?? 1,
+    meta: Meta.fromJson(json["meta"] ?? {}),
+    images: json["images"] != null ? List<String>.from(json["images"].map((x) => x.toString())) : [],
+    thumbnail: json["thumbnail"] ?? "",
   );
 
   Map<String, dynamic> toJson() => {
@@ -121,9 +123,9 @@ class Dimensions {
   Dimensions({required this.width, required this.height, required this.depth});
 
   factory Dimensions.fromJson(Map<String, dynamic> json) => Dimensions(
-    width: json["width"]?.toDouble(),
-    height: json["height"]?.toDouble(),
-    depth: json["depth"]?.toDouble(),
+    width: (json["width"] ?? 0.0).toDouble(),
+    height: (json["height"] ?? 0.0).toDouble(),
+    depth: (json["depth"] ?? 0.0).toDouble(),
   );
 
   Map<String, dynamic> toJson() => {
@@ -147,10 +149,10 @@ class Meta {
   });
 
   factory Meta.fromJson(Map<String, dynamic> json) => Meta(
-    createdAt: DateTime.parse(json["createdAt"]),
-    updatedAt: DateTime.parse(json["updatedAt"]),
-    barcode: json["barcode"],
-    qrCode: json["qrCode"],
+    createdAt: DateTime.tryParse(json["createdAt"] ?? "") ?? DateTime.now(),
+    updatedAt: DateTime.tryParse(json["updatedAt"] ?? "") ?? DateTime.now(),
+    barcode: json["barcode"] ?? "",
+    qrCode: json["qrCode"] ?? "",
   );
 
   Map<String, dynamic> toJson() => {
@@ -189,11 +191,11 @@ class Review {
   });
 
   factory Review.fromJson(Map<String, dynamic> json) => Review(
-    rating: json["rating"],
-    comment: json["comment"],
-    date: DateTime.parse(json["date"]),
-    reviewerName: json["reviewerName"],
-    reviewerEmail: json["reviewerEmail"],
+    rating: json["rating"] ?? 0,
+    comment: json["comment"] ?? "",
+    date: DateTime.tryParse(json["date"] ?? "") ?? DateTime.now(),
+    reviewerName: json["reviewerName"] ?? "Anonymous",
+    reviewerEmail: json["reviewerEmail"] ?? "",
   );
 
   Map<String, dynamic> toJson() => {

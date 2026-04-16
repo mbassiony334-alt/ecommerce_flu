@@ -19,7 +19,8 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 
 class HomeView extends StatefulWidget {
-  const HomeView({super.key});
+  final VoidCallback? onSeeAllProducts;
+  const HomeView({super.key, this.onSeeAllProducts});
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -160,7 +161,7 @@ class _HomeViewState extends State<HomeView> {
           SliverToBoxAdapter(
             child: SectionHeader(
               title: 'Popular Products',
-              onSeeAll: () {},
+              onSeeAll: widget.onSeeAllProducts,
             ),
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 14)),
@@ -174,7 +175,7 @@ class _HomeViewState extends State<HomeView> {
             SliverToBoxAdapter(
               child: SectionHeader(
                 title: 'Categories',
-                onSeeAll: () {},
+                onSeeAll: widget.onSeeAllProducts,
               ),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 14)),
@@ -188,7 +189,7 @@ class _HomeViewState extends State<HomeView> {
           SliverToBoxAdapter(
             child: SectionHeader(
               title: 'Best for You',
-              onSeeAll: () {},
+              onSeeAll: widget.onSeeAllProducts,
             ),
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 14)),
@@ -204,7 +205,7 @@ class _HomeViewState extends State<HomeView> {
             SliverToBoxAdapter(
               child: SectionHeader(
                 title: 'Top Brands',
-                onSeeAll: () {},
+                onSeeAll: widget.onSeeAllProducts,
               ),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 14)),
@@ -218,7 +219,7 @@ class _HomeViewState extends State<HomeView> {
           SliverToBoxAdapter(
             child: SectionHeader(
               title: 'Buy Again',
-              onSeeAll: () {},
+              onSeeAll: widget.onSeeAllProducts,
             ),
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 14)),
@@ -240,7 +241,7 @@ class _HomeViewState extends State<HomeView> {
     return Column(
       children: [
         SizedBox(
-          height: 155,
+          height: 165,
           child: PageView.builder(
             controller: _bannerCtrl,
             itemCount: homeBanners.length,

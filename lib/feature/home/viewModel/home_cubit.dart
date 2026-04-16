@@ -26,7 +26,6 @@ class HomeCubit extends Cubit<HomeState> {
     emit(HomeLoading());
 
     try {
-
       final results = await Future.wait([
         _fetchProducts(),
         _fetchCategories(),
@@ -37,6 +36,7 @@ class HomeCubit extends Cubit<HomeState> {
       final categories = results[1] as List<CategoriesModel>;
       final brands = results[2] as List<Brand>;
 
+      print('DEBUG: HomeLoaded - products: ${products.length}, cats: ${categories.length}, brands: ${brands.length}');
 
       final userName = CacheHelper.getData(key: _kUserNameDisplay) as String? ?? 'User';
 
@@ -47,27 +47,50 @@ class HomeCubit extends Cubit<HomeState> {
         userName: userName,
       ));
     } catch (e) {
+      print('HomeCubit Error: $e');
       emit(HomeFailure(errorMessage: e.toString()));
     }
   }
 
-
-
   Future<List<ProductsModel>> _fetchProducts() async {
-    final response = await api.get(Endpoint.proudacts);
-    final List jsonBody = response['products'] ?? response['data']?['list'] ?? [];
-    return jsonBody.map((e) => ProductsModel.fromJson(e)).toList();
+    final response = await api.get(Endpoint.products);
+    print('DEBUG: Products response: $response');
+    if (response == null) return [];
+    
+    final List jsonBody = (response is List) ? response : 
+                         (response['products'] ?? 
+                         (response['data'] is Map ? response['data']['list'] : null) ?? 
+                         (response['data'] is List ? response['data'] : null) ?? 
+                         (response['results'] is List ? response['results'] : null) ?? 
+                         []);
+    return jsonBody.map((e) => ProductsModel.fromJson(e as Map<String, dynamic>? ?? {})).toList();
   }
 
   Future<List<CategoriesModel>> _fetchCategories() async {
     final response = await api.get(Endpoint.categories);
-    final List jsonBody = response['data']?['list'] ?? [];
-    return jsonBody.map((e) => CategoriesModel.fromJson(e)).toList();
+    print('DEBUG: Categories response: $response');
+    if (response == null) return [];
+
+    final List jsonBody = (response is List) ? response : 
+                         (response['categories'] ?? 
+                         (response['data'] is Map ? response['data']['list'] : null) ?? 
+                         (response['data'] is List ? response['data'] : null) ?? 
+                         (response['results'] is List ? response['results'] : null) ?? 
+                         []);
+    return jsonBody.map((e) => CategoriesModel.fromJson(e as Map<String, dynamic>? ?? {})).toList();
   }
 
   Future<List<Brand>> _fetchBrands() async {
     final response = await api.get(Endpoint.brands);
-    final List jsonBody = response['data']?['list'] ?? [];
-    return jsonBody.map((e) => Brand.fromJson(e)).toList();
+    print('DEBUG: Brands response: $response');
+    if (response == null) return [];
+
+    final List jsonBody = (response is List) ? response : 
+                         (response['brands'] ?? 
+                         (response['data'] is Map ? response['data']['list'] : null) ?? 
+                         (response['data'] is List ? response['data'] : null) ?? 
+                         (response['results'] is List ? response['results'] : null) ?? 
+                         []);
+    return jsonBody.map((e) => Brand.fromJson(e as Map<String, dynamic>? ?? {})).toList();
   }
 }

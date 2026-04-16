@@ -23,7 +23,7 @@ class PromoBannerCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: MediaQuery.of(context).size.width - 40,
-        height: 155,
+        height: 165,
         margin: const EdgeInsets.only(right: 16),
         decoration: BoxDecoration(
           gradient: LinearGradient(
