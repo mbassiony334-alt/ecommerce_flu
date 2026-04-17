@@ -1,15 +1,15 @@
 import 'package:dio/dio.dart';
-import 'package:e_commarcae/core/services/api/endpoit.dart';
-import 'package:e_commarcae/core/services/cash/cash_Healper.dart';
+import 'package:e_commarcae/core/services/api/endpoints.dart';
+import 'package:e_commarcae/core/services/cache/cache_helper.dart';
 
 class ApiInterceptor extends Interceptor {
 
   static final List<String> _publicPaths = [
     Endpoint.signIn,
     Endpoint.signUp,
-    Endpoint.forgetwithemail,
-    Endpoint.restPass,
-    Endpoint.codeRest,
+    Endpoint.forgetWithEmail,
+    Endpoint.resetPassword,
+    Endpoint.codeReset,
   ];
 
   @override

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Banner promotional card used in the horizontal banner carousel.
+
 class PromoBannerCard extends StatelessWidget {
   const PromoBannerCard({
     super.key,
@@ -42,7 +42,7 @@ class PromoBannerCard extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            // Decorative circles
+            
             Positioned(
               right: -20,
               top: -20,
@@ -68,17 +68,16 @@ class PromoBannerCard extends StatelessWidget {
               ),
             ),
 
-            // Content
+            
             Padding(
-              padding: const EdgeInsets.all(22),
+              padding: const EdgeInsets.fromLTRB(22, 18, 22, 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  // Badge
                   Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 4),
+                        horizontal: 10, vertical: 3),
                     decoration: BoxDecoration(
                       color: Colors.white.withValues(alpha: 0.25),
                       borderRadius: BorderRadius.circular(20),
@@ -87,34 +86,38 @@ class PromoBannerCard extends StatelessWidget {
                       badgeText,
                       style: const TextStyle(
                         color: Colors.white,
-                        fontSize: 11,
+                        fontSize: 10,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 8),
                   Text(
                     title,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
+                      fontSize: 17,
                       fontWeight: FontWeight.w800,
-                      height: 1.2,
+                      height: 1.1,
                     ),
                   ),
-                  const SizedBox(height: 6),
+                  const SizedBox(height: 4),
                   Text(
                     subtitle,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       color: Colors.white.withValues(alpha: 0.85),
-                      fontSize: 13,
+                      fontSize: 12,
                     ),
                   ),
                 ],
               ),
             ),
 
-            // Arrow icon
+            
             Positioned(
               right: 20,
               bottom: 20,
@@ -139,8 +142,8 @@ class PromoBannerCard extends StatelessWidget {
   }
 }
 
-/// Static banners shown above the products section.
-/// Data is hardcoded since there's no banners API endpoint.
+
+
 final List<Map<String, dynamic>> homeBanners = [
   {
     'title': 'Summer Sale\nUp to 50% Off',

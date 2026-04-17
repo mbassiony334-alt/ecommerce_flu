@@ -2,7 +2,7 @@ import 'package:e_commarcae/core/theme/appColors/app_color_light.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// A styled search bar with a gradient filter button.
+
 class HomeSearchBar extends StatelessWidget {
   const HomeSearchBar({
     super.key,
@@ -24,7 +24,7 @@ class HomeSearchBar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: [
-          // ── Text field ──────────────────────────────────────────────
+          
           Expanded(
             child: Container(
               height: 52,
@@ -66,7 +66,7 @@ class HomeSearchBar extends StatelessWidget {
 
           const SizedBox(width: 12),
 
-          // ── Filter button ────────────────────────────────────────────
+          
           GestureDetector(
             onTap: onFilterTap,
             child: Container(

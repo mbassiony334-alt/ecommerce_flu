@@ -1,5 +1,5 @@
-import 'package:e_commarcae/core/services/api/endpoit.dart';
-import 'package:e_commarcae/core/services/cash/cash_Healper.dart';
+import 'package:e_commarcae/core/services/api/endpoints.dart';
+import 'package:e_commarcae/core/services/cache/cache_helper.dart';
 import 'package:e_commarcae/feature/auth/view/logain.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -62,7 +62,7 @@ class _LoginPromptSheet extends StatelessWidget {
           ),
           const SizedBox(height: 28),
 
-          // lock icon with gradient circle
+          
           Container(
             width: 80,
             height: 80,

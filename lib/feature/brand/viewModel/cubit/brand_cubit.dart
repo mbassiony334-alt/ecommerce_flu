@@ -1,7 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:e_commarcae/core/error/serve_eror.dart';
-import 'package:e_commarcae/core/services/api/api_Concumer.dart';
-import 'package:e_commarcae/core/services/api/endpoit.dart';
+import 'package:dio/dio.dart';
+import 'package:e_commarcae/core/error/server_error.dart';
+import 'package:e_commarcae/core/services/api/api_consumer.dart';
+import 'package:e_commarcae/core/services/api/endpoints.dart';
 import 'package:e_commarcae/feature/brand/model/brandModel.dart';
 import 'package:meta/meta.dart';
 
@@ -10,15 +11,27 @@ part 'brand_state.dart';
 class BrandCubit extends Cubit<BrandState> {
   BrandCubit({required this.api}) : super(BrandInitial());
   final ApiConsumer api;
-  Future<void> getCategoriess() async {
+
+  Map<String, dynamic>? _asMap(dynamic response) {
+    final dynamic data = response is Response ? response.data : response;
+    return data is Map<String, dynamic> ? data : null;
+  }
+
+  Future<void> getCategories() async {
     emit(BrandLoading());
     try {
-      var response = await api.get(Endpoint.brands);
-      List jsonbody = response.data["list"];
-      List<Brand> brands = jsonbody.map((e) => Brand.fromJson(e)).toList();
+      final response = await api.get(Endpoint.brands);
+      final map = _asMap(response);
+      final List rawData = (map?['data']) as List? ?? const [];
+      final List<Brand> brands = rawData
+          .whereType<Map<String, dynamic>>()
+          .map(Brand.fromJson)
+          .toList();
       emit(BrandSuccess(brands: brands));
-    } on ServeEror catch (e) {
-      emit(BrandFaliure(errorMessage: e.erorrModel.errorMessage));
+    } on ServerError catch (e) {
+      emit(BrandFailure(errorMessage: e.errorModel.errorMessage));
+    } catch (e) {
+      emit(BrandFailure(errorMessage: e.toString()));
     }
   }
 }

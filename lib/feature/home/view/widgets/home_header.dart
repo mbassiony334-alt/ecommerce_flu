@@ -3,11 +3,11 @@ import 'package:e_commarcae/feature/user/model/userModel.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// Persistent header that shows:
-///  • User avatar (network image or fallback initials)
-///  • Greeting  "Hi, {name}! 👋"
-///  • Subtitle  "Good morning / afternoon / evening"
-///  • Notification bell with badge
+
+
+
+
+
 class HomeHeader extends StatelessWidget {
   const HomeHeader({
     super.key,
@@ -38,11 +38,11 @@ class HomeHeader extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       child: Row(
         children: [
-          // ── Avatar ──────────────────────────────────────────────────
+          
           _buildAvatar(isDark),
           const SizedBox(width: 14),
 
-          // ── Greeting text ────────────────────────────────────────────
+          
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,7 +70,7 @@ class HomeHeader extends StatelessWidget {
             ),
           ),
 
-          // ── Notification bell ────────────────────────────────────────
+          
           _buildNotificationBell(theme),
         ],
       ),

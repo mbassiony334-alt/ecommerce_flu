@@ -6,16 +6,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// A premium product card used in horizontal scroll sections.
-///
-/// Displays:
-///  • Product image with gradient overlay
-///  • Discount badge
-///  • Heart (favourite) toggle button
-///  • Rating stars
-///  • Price in LE
-///  • Product title
-///  • Gradient "Add" button
+
+
+
+
+
+
+
+
+
+
 class ProductCard extends StatefulWidget {
   const ProductCard({super.key, required this.product});
 
@@ -82,10 +82,10 @@ class _ProductCardState extends State<ProductCard>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // ── Image + badges ────────────────────────────────────────────
+          
           Stack(
             children: [
-              // Image
+              
               ClipRRect(
                 borderRadius:
                     const BorderRadius.vertical(top: Radius.circular(20)),
@@ -118,7 +118,7 @@ class _ProductCardState extends State<ProductCard>
                 ),
               ),
 
-              // Gradient overlay at bottom of image
+              
               Positioned(
                 bottom: 0,
                 left: 0,
@@ -138,7 +138,7 @@ class _ProductCardState extends State<ProductCard>
                 ),
               ),
 
-              // Discount badge
+              
               if (widget.product.discountPercentage > 0)
                 Positioned(
                   top: 10,
@@ -163,7 +163,7 @@ class _ProductCardState extends State<ProductCard>
                   ),
                 ),
 
-              // Heart button
+              
               Positioned(
                 top: 8,
                 right: 8,
@@ -197,13 +197,13 @@ class _ProductCardState extends State<ProductCard>
             ],
           ),
 
-          // ── Details ───────────────────────────────────────────────────
+          
           Padding(
             padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Rating
+                
                 Row(
                   children: [
                     const Icon(Icons.star_rounded,
@@ -221,7 +221,7 @@ class _ProductCardState extends State<ProductCard>
                 ),
                 const SizedBox(height: 4),
 
-                // Title
+                
                 Text(
                   widget.product.title,
                   maxLines: 2,
@@ -235,7 +235,7 @@ class _ProductCardState extends State<ProductCard>
                 ),
                 const SizedBox(height: 6),
 
-                // Price
+                
                 Text(
                   '${widget.product.price.toStringAsFixed(2)} LE',
                   style: GoogleFonts.poppins(
@@ -246,7 +246,7 @@ class _ProductCardState extends State<ProductCard>
                 ),
                 const SizedBox(height: 10),
 
-                // Add to cart button
+                
                 SizedBox(
                   width: double.infinity,
                   height: 36,

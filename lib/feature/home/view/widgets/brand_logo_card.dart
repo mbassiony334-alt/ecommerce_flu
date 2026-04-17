@@ -3,7 +3,7 @@ import 'package:e_commarcae/feature/brand/model/brandModel.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// Styled brand logo card displayed in the horizontal brands row.
+
 class BrandLogoCard extends StatelessWidget {
   const BrandLogoCard({super.key, required this.brand, this.onTap});
 
@@ -39,7 +39,7 @@ class BrandLogoCard extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Emoji / logo placeholder
+            
             Container(
               width: 52,
               height: 52,

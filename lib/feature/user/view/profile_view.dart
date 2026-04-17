@@ -1,72 +1,73 @@
-import 'package:e_commarcae/core/services/cash/cash_Healper.dart';
+import 'package:e_commarcae/core/services/cache/cache_helper.dart';
 import 'package:e_commarcae/core/theme/appColors/app_color_light.dart';
 import 'package:e_commarcae/feature/user/model/userModel.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// User Profile Screen
-///
-/// Displays:
-///  • Avatar with gradient ring
-///  • Name, email, phone, role
-///  • Quick statistics row (orders, favourites, reviews)
-///  • Profile info tiles (Name, Email, Phone, Date of Birth)
-///  • Edit Profile button
-///  • Logout button
+
+
+
+
+
+
+
+
+
 class ProfileView extends StatelessWidget {
-  const ProfileView({super.key, this.user});
+  const ProfileView({super.key, this.user, this.isEmbedded = false});
 
   final User? user;
+  final bool isEmbedded;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
-    // Resolve user data from model or cache
+    
     final name = user?.name ?? (CacheHelper.getData(key: 'userName') as String?) ?? 'User';
     final email = user?.email ?? '';
     final phone = user?.phone ?? '';
     final role = user?.role ?? 'Customer';
     final image = user?.image ?? '';
 
-    return Scaffold(
-      backgroundColor: theme.scaffoldBackgroundColor,
-      body: CustomScrollView(
+    final content = CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
-          // ── Custom AppBar ──────────────────────────────────────────────
+          
           SliverAppBar(
             expandedHeight: 260,
             pinned: true,
             backgroundColor: theme.scaffoldBackgroundColor,
             elevation: 0,
             automaticallyImplyLeading: false,
-            leading: IconButton(
-              icon: Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: isDark
-                      ? const Color(0xFF2A2A2A)
-                      : Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.08),
-                      blurRadius: 6,
+            leading: isEmbedded
+                ? const SizedBox.shrink()
+                : IconButton(
+                    icon: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: isDark
+                            ? const Color(0xFF2A2A2A)
+                            : Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.08),
+                            blurRadius: 6,
+                          ),
+                        ],
+                      ),
+                      child: Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                        size: 18,
+                        color: theme.colorScheme.onSurface,
+                      ),
                     ),
-                  ],
-                ),
-                child: Icon(
-                  Icons.arrow_back_ios_new_rounded,
-                  size: 18,
-                  color: theme.colorScheme.onSurface,
-                ),
-              ),
-              onPressed: () => Navigator.pop(context),
-            ),
+                    onPressed: () => Navigator.pop(context),
+                  ),
             actions: [
-              // Edit profile action in top bar
+              
               Padding(
                 padding: const EdgeInsets.only(right: 16),
                 child: IconButton(
@@ -99,12 +100,12 @@ class ProfileView extends StatelessWidget {
             ),
           ),
 
-          // ── Stats row ──────────────────────────────────────────────────
+          
           SliverToBoxAdapter(
             child: _buildStatsRow(context, isDark),
           ),
 
-          // ── Info tiles ─────────────────────────────────────────────────
+          
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
@@ -140,7 +141,7 @@ class ProfileView extends StatelessWidget {
               _InfoTile(
                 icon: Icons.cake_outlined,
                 label: 'Date of Birth',
-                value: '—', // Not in current User model; shown as placeholder
+                value: '—', 
               ),
               _InfoTile(
                 icon: Icons.shield_outlined,
@@ -150,13 +151,13 @@ class ProfileView extends StatelessWidget {
             ]),
           ),
 
-          // ── Action buttons ─────────────────────────────────────────────
+          
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(20, 24, 20, 0),
               child: Column(
                 children: [
-                  // Edit Profile button
+                  
                   SizedBox(
                     width: double.infinity,
                     height: 52,
@@ -207,7 +208,7 @@ class ProfileView extends StatelessWidget {
                   ),
                   const SizedBox(height: 14),
 
-                  // Logout button
+                  
                   SizedBox(
                     width: double.infinity,
                     height: 52,
@@ -238,11 +239,17 @@ class ProfileView extends StatelessWidget {
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 40)),
         ],
-      ),
+      );
+    if (isEmbedded) {
+      return content;
+    }
+    return Scaffold(
+      backgroundColor: theme.scaffoldBackgroundColor,
+      body: content,
     );
   }
 
-  // ── Profile hero section ───────────────────────────────────────────────
+  
   Widget _buildProfileHero(
     bool isDark,
     String name,
@@ -264,7 +271,7 @@ class ProfileView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SizedBox(height: 60),
-          // Avatar
+          
           Container(
             padding: const EdgeInsets.all(4),
             decoration: BoxDecoration(
@@ -318,7 +325,7 @@ class ProfileView extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 6),
-          // Role chip
+          
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
             decoration: BoxDecoration(
@@ -340,7 +347,7 @@ class ProfileView extends StatelessWidget {
     );
   }
 
-  // ── Stats row ──────────────────────────────────────────────────────────
+  
   Widget _buildStatsRow(BuildContext context, bool isDark) {
     final items = [
       {'label': 'Orders', 'value': '12', 'icon': Icons.shopping_bag_outlined},
@@ -405,7 +412,7 @@ class ProfileView extends StatelessWidget {
     );
   }
 
-  // ── Helpers ────────────────────────────────────────────────────────────
+  
   String _initials(String name) {
     if (name.isEmpty) return '?';
     final parts = name.trim().split(' ');
@@ -450,7 +457,7 @@ class ProfileView extends StatelessWidget {
             onPressed: () {
               CacheHelper.clear();
               Navigator.pop(context);
-              // Navigate back to auth
+              
               Navigator.of(context)
                   .popUntil((route) => route.isFirst);
             },
@@ -463,7 +470,7 @@ class ProfileView extends StatelessWidget {
   }
 }
 
-// ── Info tile ──────────────────────────────────────────────────────────────
+
 class _InfoTile extends StatelessWidget {
   const _InfoTile({
     required this.icon,
@@ -497,7 +504,7 @@ class _InfoTile extends StatelessWidget {
         ),
         child: Row(
           children: [
-            // Icon circle
+            
             Container(
               width: 42,
               height: 42,
@@ -508,7 +515,7 @@ class _InfoTile extends StatelessWidget {
               child: Icon(icon, color: AppColorLight.primaryColor, size: 20),
             ),
             const SizedBox(width: 14),
-            // Label + value
+            
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -542,7 +549,7 @@ class _InfoTile extends StatelessWidget {
   }
 }
 
-// ── Edit Profile Bottom Sheet ──────────────────────────────────────────────
+
 class _EditProfileSheet extends StatefulWidget {
   const _EditProfileSheet({
     required this.initialName,
@@ -598,7 +605,7 @@ class _EditProfileSheetState extends State<_EditProfileSheet> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Handle bar
+            
             Center(
               child: Container(
                 width: 40,
@@ -636,7 +643,7 @@ class _EditProfileSheetState extends State<_EditProfileSheet> {
                   ),
                 ),
                 onPressed: () {
-                  // Save to cache
+                  
                   CacheHelper.saveData(
                     key: 'userName',
                     value: _nameCtrl.text.trim(),

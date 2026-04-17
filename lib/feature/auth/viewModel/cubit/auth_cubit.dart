@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:e_commarcae/core/error/serve_eror.dart';
-import 'package:e_commarcae/core/services/api/api_Concumer.dart';
-import 'package:e_commarcae/core/services/api/endpoit.dart';
-import 'package:e_commarcae/core/services/cash/cash_Healper.dart';
+import 'package:e_commarcae/core/error/server_error.dart';
+import 'package:e_commarcae/core/services/api/api_consumer.dart';
+import 'package:e_commarcae/core/services/api/endpoints.dart';
+import 'package:e_commarcae/core/services/cache/cache_helper.dart';
 import 'package:e_commarcae/feature/auth/model/resgeter.dart';
 import 'package:e_commarcae/feature/auth/model/signModel.dart';
 import 'package:flutter/material.dart';
@@ -26,8 +26,10 @@ class AuthCubit extends Cubit<AuthState> {
       await CacheHelper.saveData(key: ApiKey.token, value: signModel.token);
       await CacheHelper.saveData(key: 'userName', value: signModel.user.name);
       emit(AuthSucces());
-    } on ServeEror catch (e) {
-      emit(AuthFailure(errormessage: e.erorrModel.errorMessage));
+    } on ServerError catch (e) {
+      emit(AuthFailure(errormessage: e.errorModel.errorMessage));
+    } catch (e) {
+      emit(AuthFailure(errormessage: e.toString()));
     }
   }
 
@@ -52,8 +54,10 @@ class AuthCubit extends Cubit<AuthState> {
         await CacheHelper.saveData(key: 'userName', value: signModel.user.name);
       }
       emit(Regsuccess());
-    } on ServeEror catch (e) {
-      emit(Regfailure(errormessage: e.erorrModel.errorMessage));
+    } on ServerError catch (e) {
+      emit(Regfailure(errormessage: e.errorModel.errorMessage));
+    } catch (e) {
+      emit(Regfailure(errormessage: e.toString()));
     }
   }
 
@@ -61,13 +65,15 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthLoading());
     try {
       var response = await api.post(
-        Endpoint.forgetwithemail,
+        Endpoint.forgetWithEmail,
         data: {ApiKey.email: email, ApiKey.phone: phone},
       );
       print(response);
       emit(ForgetPass());
-    } on ServeEror catch (e) {
-      emit(Forgetfaliure(errormessage: e.erorrModel.errorMessage));
+    } on ServerError catch (e) {
+      emit(Forgetfaliure(errormessage: e.errorModel.errorMessage));
+    } catch (e) {
+      emit(Forgetfaliure(errormessage: e.toString()));
     }
   }
 
@@ -75,13 +81,15 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthLoading());
     try {
       var response = await api.post(
-        Endpoint.restPass,
+        Endpoint.resetPassword,
         data: {ApiKey.email: email, ApiKey.password:pass,ApiKey.confirmPassword:confirm},
       );
       print(response);
       emit(RestPassSuccess());
-    } on ServeEror catch (e) {
-      emit(RestPassfaliure(errormessage: e.erorrModel.errorMessage));
+    } on ServerError catch (e) {
+      emit(RestPassfaliure(errormessage: e.errorModel.errorMessage));
+    } catch (e) {
+      emit(RestPassfaliure(errormessage: e.toString()));
     }
   }
   }

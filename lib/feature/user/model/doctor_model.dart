@@ -1,23 +1,23 @@
-/// DoctorModel — maps the backend Doctor document.
-///
-/// Backend schema (Dental Clinic):
-/// ```json
-/// {
-///   "_id": "...",
-///   "name": "Dr. Ahmed Hassan",
-///   "specialization": "Orthodontics",
-///   "phone": "01012345678",
-///   "email": "ahmed@clinic.com",
-///   "avatarUrl": "https://...",
-///   "rating": 4.8,
-///   "workingHours": [
-///     { "day": "Sunday", "from": "09:00", "to": "17:00" }
-///   ],
-///   "isAvailable": true,
-///   "yearsOfExperience": 10,
-///   "clinicAddress": "Cairo, Egypt"
-/// }
-/// ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class DoctorModel {
   final String id;
   final String name;
@@ -75,7 +75,7 @@ class DoctorModel {
         'clinicAddress': clinicAddress,
       };
 
-  /// Returns a copy with optional field overrides.
+  
   DoctorModel copyWith({
     String? id,
     String? name,
@@ -104,7 +104,7 @@ class DoctorModel {
       );
 }
 
-/// A single day-slot in a doctor's schedule.
+
 class WorkingHour {
   final String day;
   final String from;

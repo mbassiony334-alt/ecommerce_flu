@@ -28,7 +28,7 @@ class _ForgetPassemailState extends State<ForgetPassemail> {
     return Center(
       child: Column(
         children: [
-          // ignore: sized_box_for_whitespace
+          
           Container(
             width: context.wp(.8),
             height: context.responsiveValue(
@@ -71,7 +71,7 @@ class _ForgetPassemailState extends State<ForgetPassemail> {
                   MaterialPageRoute(builder: (_) => Codepage(email:controlleremail.text)),
                 );
               }
-              // TODO: implement listener
+              
             },
             builder: (context, state) {
               final forget = BlocProvider.of<AuthCubit>(context);

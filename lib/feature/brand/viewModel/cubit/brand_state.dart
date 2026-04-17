@@ -13,8 +13,8 @@ final class BrandSuccess extends BrandState {
   BrandSuccess({required this.brands});
 }
 
-final class BrandFaliure extends BrandState {
+final class BrandFailure extends BrandState {
   final String errorMessage;
 
-  BrandFaliure({required this.errorMessage});
+  BrandFailure({required this.errorMessage});
 }

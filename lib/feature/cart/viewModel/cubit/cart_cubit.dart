@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:e_commarcae/core/error/serve_eror.dart';
-import 'package:e_commarcae/core/services/api/api_Concumer.dart';
-import 'package:e_commarcae/core/services/api/endpoit.dart';
+import 'package:e_commarcae/core/error/server_error.dart';
+import 'package:e_commarcae/core/services/api/api_consumer.dart';
+import 'package:e_commarcae/core/services/api/endpoints.dart';
 import 'package:e_commarcae/feature/products/model/productsModel.dart';
 import 'package:meta/meta.dart';
 
@@ -13,41 +13,46 @@ class CartCubit extends Cubit<CartState> {
   Future<void> addCart(int id) async {
     emit(CartLoading());
     try {
-      var response = await api.post(
+      await api.post(
         Endpoint.addCart,
         data: {ApiKey.productId: id},
       );
-      print(response);
       emit(CartSuccess());
-    } on ServeEror catch (e) {
-      emit(CartFailure(errorMessage: e.erorrModel.errorMessage));
+    } on ServerError catch (e) {
+      emit(CartFailure(errorMessage: e.errorModel.errorMessage));
+    } catch (e) {
+      emit(CartFailure(errorMessage: e.toString()));
     }
   }
 
   Future<void> getCart() async {
     emit(CartLoading());
     try {
-      var response = await api.get(Endpoint.getCart);
-      List jsonbody = response.data["list"];
-      List<ProductsModel> carts = jsonbody
-          .map((e) => ProductsModel.fromJson(e))
+      final response = await api.get(Endpoint.getCart);
+      final list = (response is Map<String, dynamic> ? response['data'] : null) as List? ?? const [];
+      final List<ProductsModel> carts = list
+          .whereType<Map<String, dynamic>>()
+          .map(ProductsModel.fromJson)
           .toList();
       emit(ListCartSuccess(car: carts));
-    } on ServeEror catch (e) {
-      emit(CartFailure(errorMessage: e.erorrModel.errorMessage));
+    } on ServerError catch (e) {
+      emit(CartFailure(errorMessage: e.errorModel.errorMessage));
+    } catch (e) {
+      emit(CartFailure(errorMessage: e.toString()));
     }
   }
   Future<void> delCart(int id) async {
     emit(CartLoading());
     try {
-      var response = await api.post(
+      await api.post(
         Endpoint.delCart,
         data: {ApiKey.productId: id},
       );
-      print(response);
       emit(DelCartSuccess());
-    } on ServeEror catch (e) {
-      emit(DelCartFaliure(errorMessage: e.erorrModel.errorMessage));
+    } on ServerError catch (e) {
+      emit(DelCartFaliure(errorMessage: e.errorModel.errorMessage));
+    } catch (e) {
+      emit(DelCartFaliure(errorMessage: e.toString()));
     }
   }
 }

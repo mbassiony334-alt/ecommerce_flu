@@ -2,7 +2,7 @@ import 'package:e_commarcae/core/theme/appColors/app_color_light.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// A horizontal section title row with a "See All" link.
+
 class SectionHeader extends StatelessWidget {
   const SectionHeader({
     super.key,

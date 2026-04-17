@@ -16,7 +16,7 @@ class Productscard extends StatefulWidget {
 
 class _ProductscardState extends State<Productscard> {
   bool isFav = false;
-  // final favourite = BlocProvider.of<FavCubit>(context);
+  
   @override
   Widget build(BuildContext context) {
     final favourite = BlocProvider.of<FavCubit>(context);

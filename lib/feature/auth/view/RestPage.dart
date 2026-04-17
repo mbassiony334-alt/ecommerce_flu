@@ -38,7 +38,7 @@ class _RestpageState extends State<Restpage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // ignore: sized_box_for_whitespace
+              
               Container(
                 width: context.wp(.8),
                 height: context.responsiveValue(

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// A shimmer/skeleton placeholder while data is loading.
-/// Renders grey boxes the same shape as the actual content.
 class HomeLoadingShimmer extends StatefulWidget {
   const HomeLoadingShimmer({super.key});
 
@@ -46,9 +44,7 @@ class _HomeLoadingShimmerState extends State<HomeLoadingShimmer>
           width: width,
           height: height,
           decoration: BoxDecoration(
-            color: isDark
-                ? const Color(0xFF2A2A2A)
-                : const Color(0xFFE8EDF5),
+            color: isDark ? const Color(0xFF2A2A2A) : const Color(0xFFE8EDF5),
             borderRadius: BorderRadius.circular(radius),
           ),
         ),
@@ -63,7 +59,6 @@ class _HomeLoadingShimmerState extends State<HomeLoadingShimmer>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header shimmer
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
             child: Row(
@@ -84,15 +79,11 @@ class _HomeLoadingShimmerState extends State<HomeLoadingShimmer>
               ],
             ),
           ),
-
-          // Search bar shimmer
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: _shimmerBox(height: 52, radius: 16),
           ),
           const SizedBox(height: 24),
-
-          // Banner shimmer
           Padding(
             padding: const EdgeInsets.only(left: 20),
             child: _shimmerBox(
@@ -102,8 +93,6 @@ class _HomeLoadingShimmerState extends State<HomeLoadingShimmer>
             ),
           ),
           const SizedBox(height: 24),
-
-          // Section header
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
@@ -115,51 +104,47 @@ class _HomeLoadingShimmerState extends State<HomeLoadingShimmer>
             ),
           ),
           const SizedBox(height: 16),
-
-          // Product cards shimmer row
-          Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: Row(
-              children: List.generate(
-                3,
-                (_) => Padding(
-                  padding: const EdgeInsets.only(right: 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _shimmerBox(width: 175, height: 155, radius: 20),
-                      const SizedBox(height: 10),
-                      _shimmerBox(width: 120, height: 12),
-                      const SizedBox(height: 8),
-                      _shimmerBox(width: 80, height: 16),
-                    ],
-                  ),
+          SizedBox(
+            height: 220,
+            child: ListView.builder(
+              padding: const EdgeInsets.only(left: 20),
+              scrollDirection: Axis.horizontal,
+              itemCount: 3,
+              itemBuilder: (context, _) => Padding(
+                padding: const EdgeInsets.only(right: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _shimmerBox(width: 175, height: 155, radius: 20),
+                    const SizedBox(height: 10),
+                    _shimmerBox(width: 120, height: 12),
+                    const SizedBox(height: 8),
+                    _shimmerBox(width: 80, height: 16),
+                  ],
                 ),
               ),
             ),
           ),
           const SizedBox(height: 24),
-
-          // Categories shimmer
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: _shimmerBox(width: 140, height: 18),
           ),
           const SizedBox(height: 16),
-          Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: Row(
-              children: List.generate(
-                4,
-                (_) => Padding(
-                  padding: const EdgeInsets.only(right: 14),
-                  child: Column(
-                    children: [
-                      _shimmerBox(width: 68, height: 68, radius: 34),
-                      const SizedBox(height: 8),
-                      _shimmerBox(width: 58, height: 12),
-                    ],
-                  ),
+          SizedBox(
+            height: 90,
+            child: ListView.builder(
+              padding: const EdgeInsets.only(left: 20),
+              scrollDirection: Axis.horizontal,
+              itemCount: 5,
+              itemBuilder: (context, _) => Padding(
+                padding: const EdgeInsets.only(right: 14),
+                child: Column(
+                  children: [
+                    _shimmerBox(width: 68, height: 68, radius: 34),
+                    const SizedBox(height: 8),
+                    _shimmerBox(width: 58, height: 12),
+                  ],
                 ),
               ),
             ),

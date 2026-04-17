@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-// ─────────────────────────────────────────────────────────────────
-// Colour tokens
-// ─────────────────────────────────────────────────────────────────
 
-/// All colour constants used by [AppTheme].
-/// This single source of truth is version-controlled and avoids
-/// class-level duplication across AppColorLight / AppColorDark.
+
+
+
+
+
+
 abstract final class AppColors {
-  // ── Shared ──────────────────────────────────────────────────────
+  
   static const Color primaryBlue = Color(0xFF4A80F0);
-  static const Color primaryBlueSaturated = Color(0xFF5B8FFF); // dark mode accent
+  static const Color primaryBlueSaturated = Color(0xFF5B8FFF); 
 
-  // ── Light palette ────────────────────────────────────────────────
+  
   static const Color lightBackground = Color(0xFFFFFFFF);
   static const Color lightCard = Color(0xFFF5F5F5);
   static const Color lightSurface = Color(0xFFF0F4FF);
@@ -21,7 +21,7 @@ abstract final class AppColors {
   static const Color lightSubtitle = Color(0xFF51526C);
   static const Color lightDivider = Color(0xFFE0E6F0);
 
-  // ── Dark palette ─────────────────────────────────────────────────
+  
   static const Color darkBackground = Color(0xFF121212);
   static const Color darkCard = Color(0xFF1E1E1E);
   static const Color darkSurface = Color(0xFF252525);
@@ -29,29 +29,29 @@ abstract final class AppColors {
   static const Color darkSubtitle = Color(0xFFB0B3C7);
   static const Color darkDivider = Color(0xFF2E2E2E);
 
-  // ── Semantic ─────────────────────────────────────────────────────
+  
   static const Color success = Color(0xFF2ECC71);
   static const Color warning = Color(0xFFF39C12);
   static const Color danger = Color(0xFFE74C3C);
 }
 
-// ─────────────────────────────────────────────────────────────────
-// AppTheme
-// ─────────────────────────────────────────────────────────────────
 
-/// Central theming class.  Use [AppTheme.light] and [AppTheme.dark]
-/// in [MaterialApp] and toggle with [ThemeMode.system] or a custom
-/// state-management solution.
-///
-/// ```dart
-/// MaterialApp(
-///   theme:      AppTheme.light,
-///   darkTheme:  AppTheme.dark,
-///   themeMode:  ThemeMode.system,
-/// )
-/// ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 abstract final class AppTheme {
-  // ── Shared typography ────────────────────────────────────────────
+  
   static TextTheme _textTheme(Color onSurface, Color subtitle) {
     final base = GoogleFonts.poppinsTextTheme();
     return base.copyWith(
@@ -87,21 +87,21 @@ abstract final class AppTheme {
     );
   }
 
-  /// Clamps a font-size between [min] and [max].
-  /// [preferred] is the normal size for mobile.
+  
+  
   static double _clamp(double min, double preferred, double max) =>
       preferred.clamp(min, max);
 
-  // ─── Light ───────────────────────────────────────────────────────
+  
   static ThemeData get light => ThemeData(
         brightness: Brightness.light,
         useMaterial3: true,
         primaryColor: AppColors.primaryBlue,
 
-        // Scaffold
+        
         scaffoldBackgroundColor: AppColors.lightBackground,
 
-        // ColorScheme
+        
         colorScheme: const ColorScheme.light(
           primary: AppColors.primaryBlue,
           onPrimary: Colors.white,
@@ -111,7 +111,7 @@ abstract final class AppTheme {
           error: AppColors.danger,
         ),
 
-        // AppBar
+        
         appBarTheme: AppBarTheme(
           backgroundColor: AppColors.lightBackground,
           elevation: 0,
@@ -125,7 +125,7 @@ abstract final class AppTheme {
           surfaceTintColor: Colors.transparent,
         ),
 
-        // Card
+        
         cardTheme: CardThemeData(
           color: AppColors.lightCard,
           elevation: 0,
@@ -134,13 +134,13 @@ abstract final class AppTheme {
           ),
         ),
 
-        // Divider
+        
         dividerTheme: const DividerThemeData(
           color: AppColors.lightDivider,
           thickness: 1,
         ),
 
-        // Input
+        
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
           fillColor: AppColors.lightSurface,
@@ -173,7 +173,7 @@ abstract final class AppTheme {
           ),
         ),
 
-        // ElevatedButton
+        
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.primaryBlue,
@@ -190,7 +190,7 @@ abstract final class AppTheme {
           ),
         ),
 
-        // OutlinedButton — WidgetStateProperty ensures border changes per state
+        
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: ButtonStyle(
             foregroundColor: WidgetStateProperty.resolveWith(
@@ -230,7 +230,7 @@ abstract final class AppTheme {
           ),
         ),
 
-        // TextButton
+        
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
             foregroundColor: AppColors.primaryBlue,
@@ -238,7 +238,7 @@ abstract final class AppTheme {
           ),
         ),
 
-        // Chip
+        
         chipTheme: ChipThemeData(
           backgroundColor: AppColors.lightSurface,
           selectedColor: AppColors.primaryBlue.withValues(alpha: 0.15),
@@ -249,7 +249,7 @@ abstract final class AppTheme {
           ),
         ),
 
-        // SnackBar
+        
         snackBarTheme: SnackBarThemeData(
           backgroundColor: AppColors.lightOnSurface,
           contentTextStyle: GoogleFonts.poppins(
@@ -262,23 +262,23 @@ abstract final class AppTheme {
           behavior: SnackBarBehavior.floating,
         ),
 
-        // Typography
+        
         textTheme: _textTheme(
           AppColors.lightOnSurface,
           AppColors.lightSubtitle,
         ),
       );
 
-  // ─── Dark ────────────────────────────────────────────────────────
+  
   static ThemeData get dark => ThemeData(
         brightness: Brightness.dark,
         useMaterial3: true,
         primaryColor: AppColors.primaryBlueSaturated,
 
-        // Scaffold
+        
         scaffoldBackgroundColor: AppColors.darkBackground,
 
-        // ColorScheme
+        
         colorScheme: const ColorScheme.dark(
           primary: AppColors.primaryBlueSaturated,
           onPrimary: Colors.white,
@@ -288,7 +288,7 @@ abstract final class AppTheme {
           error: AppColors.danger,
         ),
 
-        // AppBar
+        
         appBarTheme: AppBarTheme(
           backgroundColor: AppColors.darkBackground,
           elevation: 0,
@@ -302,7 +302,7 @@ abstract final class AppTheme {
           surfaceTintColor: Colors.transparent,
         ),
 
-        // Card
+        
         cardTheme: CardThemeData(
           color: AppColors.darkCard,
           elevation: 0,
@@ -311,13 +311,13 @@ abstract final class AppTheme {
           ),
         ),
 
-        // Divider
+        
         dividerTheme: const DividerThemeData(
           color: AppColors.darkDivider,
           thickness: 1,
         ),
 
-        // Input
+        
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
           fillColor: AppColors.darkSurface,
@@ -350,7 +350,7 @@ abstract final class AppTheme {
           ),
         ),
 
-        // ElevatedButton
+        
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.primaryBlueSaturated,
@@ -367,7 +367,7 @@ abstract final class AppTheme {
           ),
         ),
 
-        // OutlinedButton — same WidgetStateProperty pattern for dark
+        
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: ButtonStyle(
             foregroundColor: WidgetStateProperty.resolveWith(
@@ -408,7 +408,7 @@ abstract final class AppTheme {
           ),
         ),
 
-        // TextButton
+        
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
             foregroundColor: AppColors.primaryBlueSaturated,
@@ -416,7 +416,7 @@ abstract final class AppTheme {
           ),
         ),
 
-        // Chip
+        
         chipTheme: ChipThemeData(
           backgroundColor: AppColors.darkSurface,
           selectedColor:
@@ -431,7 +431,7 @@ abstract final class AppTheme {
           ),
         ),
 
-        // SnackBar
+        
         snackBarTheme: SnackBarThemeData(
           backgroundColor: AppColors.darkCard,
           contentTextStyle: GoogleFonts.poppins(
@@ -444,7 +444,7 @@ abstract final class AppTheme {
           behavior: SnackBarBehavior.floating,
         ),
 
-        // Typography
+        
         textTheme: _textTheme(
           AppColors.darkOnSurface,
           AppColors.darkSubtitle,

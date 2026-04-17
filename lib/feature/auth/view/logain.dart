@@ -37,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // ignore: sized_box_for_whitespace
+              
               Container(
                 width: context.wp(.8),
                 height: context.responsiveValue(

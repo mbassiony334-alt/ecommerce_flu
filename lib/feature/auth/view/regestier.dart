@@ -21,7 +21,7 @@ class _RegestierPageState extends State<RegestierPage> {
   TextEditingController controllerconfirmpassword = TextEditingController();
   TextEditingController controllerphone = TextEditingController();
   TextEditingController controllername = TextEditingController();
-  // RegetierModel reg=RegetierModel(name: controllername.text, phone: controllerph.text, email: email, password: password, confirmPassword: confirmPassword);
+  
 
   @override
   void dispose() {

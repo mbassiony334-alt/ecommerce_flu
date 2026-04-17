@@ -13,14 +13,14 @@ final class ProductSuccess extends ProductsState {
   ProductSuccess({required this.products});
 }
 
-final class ProductsFaliure extends ProductsState {
+final class ProductsFailure extends ProductsState {
   final String errorMessage;
 
-  ProductsFaliure({required this.errorMessage});
+  ProductsFailure({required this.errorMessage});
 }
 
-final class SpecficProductSuccess extends ProductsState {
+final class SpecificProductSuccess extends ProductsState {
  final ProductsModel product;
 
-  SpecficProductSuccess({ required this.product});
+  SpecificProductSuccess({ required this.product});
 }

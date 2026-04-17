@@ -3,8 +3,8 @@ import 'package:e_commarcae/feature/categories/model/categoriesModel.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// Rounded category icon with label below, used in the horizontal
-/// scrollable categories row on the home screen.
+
+
 class CategoryChip extends StatelessWidget {
   const CategoryChip({
     super.key,
@@ -29,7 +29,7 @@ class CategoryChip extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // ── Icon container ─────────────────────────────────────────
+            
             AnimatedContainer(
               duration: const Duration(milliseconds: 200),
               width: 68,
@@ -75,7 +75,7 @@ class CategoryChip extends StatelessWidget {
 
             const SizedBox(height: 8),
 
-            // ── Label ──────────────────────────────────────────────────
+            
             SizedBox(
               width: 72,
               child: Text(

@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
+    
     super.initState();
     timer = Timer(Duration(seconds: 5), () {
       Navigator.pushReplacement(
@@ -44,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
             Container(
               width: context.wp(0.8),
               height: context.hp(0.31),
-              // margin: EdgeInsets.only(left: context.wp(0.1), top: context.hp(0.34)),
+              
               child: Image.asset(
                 "assets/images/splashImg.png",
                 fit: BoxFit.cover,
